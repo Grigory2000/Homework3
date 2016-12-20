@@ -7,33 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public class TradeJobMain {
-    @Autowired
-    private final TradesDAO tradesDAO;
-    @Autowired
-    private Downloader downloader;
-    @Autowired
-    public Parser parser;
+    private final TradeUpdater updater;
 
-    public TradeJobMain(){ tradesDAO = null;}
-    public TradeJobMain(TradesDAO tradesDAO, String fileName, Parser parser, Downloader downloader) {
-        this.tradesDAO = tradesDAO;
+    private final Downloader downloader;
+    private final Parser parser;
+
+    public TradeJobMain(TradeUpdater updater, Parser parser, Downloader downloader) {
         this.downloader = downloader;
         this.parser = parser;
+        this.updater = updater;
     }
 
     public void run() {
         String filename = downloader.downloadTradesFile();
         Iterable<Trade> tradeRecords = parser.parse();
-        updateTrades(tradeRecords);
+        updater.updateTrades(tradeRecords);
     }
 
-
-
-    private void updateTrades(Iterable<Trade> trades) {
-        tradesDAO.deleteAll();
-        if(trades != null)
-            for (Trade tradeRecord : trades) {
-                tradesDAO.save(tradeRecord);
-            }
-    }
 }

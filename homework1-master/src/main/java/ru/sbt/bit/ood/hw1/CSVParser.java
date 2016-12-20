@@ -28,6 +28,7 @@ public class CSVParser implements Parser<Trade> {
             throw new RuntimeException("There was an error while parsing CSV file");
         }
     }
+
     public Iterable<Trade> CSVToTrade(Iterable<CSVRecord> inp){
         List<Trade> trades = new ArrayList<Trade>();
         for(CSVRecord record : inp) {
