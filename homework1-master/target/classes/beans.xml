@@ -15,6 +15,7 @@
     <bean id="downloader" class="ru.sbt.bit.ood.hw1.DownloadFinished"/>
 
     <bean id="parser" class="ru.sbt.bit.ood.hw1.ParseFinished"/>
+
     <bean id="tradesDao" class="ru.sbt.bit.ood.hw1.TradesDAO"/>
 
     <bean id="updater" class="ru.sbt.bit.ood.hw1.TradeUpdater">
